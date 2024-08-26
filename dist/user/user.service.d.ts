@@ -16,4 +16,14 @@ export declare class UserService {
         user?: User;
         token?: string;
     }>;
+    findAll(): Promise<User[]>;
+    deleteUser(deleteUserDto: LoginUserDto): Promise<{
+        success: boolean;
+        message: string;
+    }>;
+    update(updateUserDto: RegisterUserDto): Promise<{
+        success: boolean;
+        message: string;
+        user: User;
+    }>;
 }

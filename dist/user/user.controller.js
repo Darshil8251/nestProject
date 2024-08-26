@@ -38,6 +38,12 @@ let UserController = class UserController {
     login(loginUserDto) {
         return this.userService.login(loginUserDto);
     }
+    findAll() {
+        return this.userService.findAll();
+    }
+    deleteUser(deleteUserDto) {
+        return this.userService.deleteUser(deleteUserDto);
+    }
 };
 exports.UserController = UserController;
 __decorate([
@@ -59,6 +65,19 @@ __decorate([
     __metadata("design:paramtypes", [login_user_dto_1.LoginUserDto]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "login", null);
+__decorate([
+    (0, common_1.Get)('allUser'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Delete)('deleteUser'),
+    __param(0, (0, common_1.Body)(common_1.ValidationPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [login_user_dto_1.LoginUserDto]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "deleteUser", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)('user'),
     __metadata("design:paramtypes", [user_service_1.UserService])

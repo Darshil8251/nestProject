@@ -16,7 +16,6 @@ class RegisterUserDto {
 exports.RegisterUserDto = RegisterUserDto;
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], RegisterUserDto.prototype, "firstName", void 0);
 __decorate([

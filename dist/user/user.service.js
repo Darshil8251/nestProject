@@ -65,6 +65,57 @@ let UserService = class UserService {
             throw error;
         }
     }
+    findAll() {
+        try {
+            return this.userRepository.find();
+        }
+        catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+    async deleteUser(deleteUserDto) {
+        try {
+            const deleteResult = await this.userRepository.delete({ email: deleteUserDto.email });
+            if (deleteResult.affected === 0) {
+                throw new common_1.NotFoundException('User not found or could not be deleted');
+            }
+            return {
+                success: true,
+                message: 'User successfully deleted',
+            };
+        }
+        catch (error) {
+            if (error instanceof common_1.NotFoundException) {
+                throw error;
+            }
+            throw new common_1.ConflictException('User cannot be deleted due to existing dependencies');
+        }
+    }
+    async update(updateUserDto) {
+        try {
+            let user = await this.userRepository.findOneBy({ email: updateUserDto.email });
+            if (!user) {
+                throw new common_1.NotFoundException('User not found');
+            }
+            if (updateUserDto.password) {
+                updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
+            }
+            Object.assign(user_entity_1.User, updateUserDto);
+            const updatedUser = await this.userRepository.save(user);
+            return {
+                success: true,
+                message: 'User updated successfully',
+                user: updatedUser
+            };
+        }
+        catch (error) {
+            if (error instanceof common_1.NotFoundException) {
+                throw error;
+            }
+            throw new common_1.ConflictException('User cannot be deleted due to existing dependencies');
+        }
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([

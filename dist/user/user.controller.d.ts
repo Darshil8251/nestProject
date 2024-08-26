@@ -16,4 +16,9 @@ export declare class UserController {
         user?: User;
         Token?: string;
     }>;
+    findAll(): Promise<User[]>;
+    deleteUser(deleteUserDto: LoginUserDto): Promise<{
+        success: boolean;
+        message: string;
+    }>;
 }

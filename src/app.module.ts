@@ -7,7 +7,6 @@ import { join } from 'path';
 import { HttpExceptionFilter } from './http-exception.filter';
 import { APP_FILTER } from '@nestjs/core';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({

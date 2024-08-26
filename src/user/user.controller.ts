@@ -29,12 +29,22 @@ export class UserController {
       throw new HttpException(
         { success: false, message: 'An unexpected error occurred' },
         HttpStatus.INTERNAL_SERVER_ERROR
-      ); }
+      );
+    }
   }
 
   @Get('login')
-  login(@Body(ValidationPipe) loginUserDto:LoginUserDto) : Promise<{ success: boolean; message: string; user?: User;Token?:string }> {
+  login(@Body(ValidationPipe) loginUserDto: LoginUserDto): Promise<{ success: boolean; message: string; user?: User; Token?: string }> {
     return this.userService.login(loginUserDto);
   }
- 
+
+  @Get('allUser')
+  findAll(): Promise<User[]> {
+    return this.userService.findAll()
+  }
+
+  @Delete('deleteUser')
+  deleteUser(@Body(ValidationPipe) deleteUserDto:LoginUserDto){
+    return this.userService.deleteUser(deleteUserDto)
+  }
 }
